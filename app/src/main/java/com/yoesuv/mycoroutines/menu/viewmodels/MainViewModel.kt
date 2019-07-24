@@ -1,6 +1,7 @@
 package com.yoesuv.mycoroutines.menu.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.yoesuv.mycoroutines.networks.repositories.MainRepository
 import kotlinx.coroutines.CoroutineScope
@@ -11,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 
 class MainViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
 
-    var job: Job = Job()
+    private var job: Job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -20,9 +21,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application), C
 
     fun getListPlace() {
         launch {
-            mainRepository.getListPlace({
+            mainRepository.getListPlace({ listPlaceModel ->
+                Log.d("result_debug","data count : ${listPlaceModel?.data?.size}")
+            }, {
 
-            },{
+            }, {
 
             })
         }
