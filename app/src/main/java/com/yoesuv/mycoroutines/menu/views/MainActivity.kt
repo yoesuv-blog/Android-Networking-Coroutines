@@ -17,5 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = MainViewModel(application)
         binding.main = viewModel
+
+        viewModel.getListPlace()
     }
 }
