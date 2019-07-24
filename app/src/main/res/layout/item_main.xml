@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:text="@{item.name}"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="@tools:sample/cities"/>
@@ -47,6 +48,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textSize="14sp"
+                    android:text="@{item.location}"
                     tools:text="@tools:sample/lorem"/>
 
         </LinearLayout>
