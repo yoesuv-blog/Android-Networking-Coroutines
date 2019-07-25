@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,8 +10,6 @@
     </data>
 
     <GridLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
@@ -22,6 +22,7 @@
                 android:layout_width="@dimen/item_image_view_size"
                 android:layout_height="@dimen/item_image_view_size"
                 android:scaleType="centerCrop"
+                app:loadImage="@{item.imageUrl}"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"/>
 
         <LinearLayout
