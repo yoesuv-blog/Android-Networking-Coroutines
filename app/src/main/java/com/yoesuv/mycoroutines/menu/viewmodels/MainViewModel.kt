@@ -1,6 +1,7 @@
 package com.yoesuv.mycoroutines.menu.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -20,8 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             mainRepository.getListPlace({ listPlaceModel ->
                 isLoading.postValue(false)
                 liveDataListPlace.postValue(listPlaceModel?.data)
-            }, {
+            }, { code, response ->
                 isLoading.postValue(false)
+                Log.e("result_error","code $code body ${response?.string()}")
             }, {
                 isLoading.postValue(false)
             })
