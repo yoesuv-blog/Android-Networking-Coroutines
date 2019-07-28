@@ -7,27 +7,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.yoesuv.mycoroutines.menu.models.ListPlaceModel
 import com.yoesuv.mycoroutines.networks.repositories.MainRepository
-import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mainRepository = MainRepository()
+    private val mainRepository = MainRepository(viewModelScope)
     var liveDataListPlace: MutableLiveData<MutableList<ListPlaceModel.PlaceModel>> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getListPlace() {
         isLoading.postValue(true)
-        viewModelScope.launch {
-            mainRepository.getListPlace({ listPlaceModel ->
-                isLoading.postValue(false)
-                liveDataListPlace.postValue(listPlaceModel?.data)
-            }, { code, response ->
-                isLoading.postValue(false)
-                Log.e("result_error","code $code body ${response?.string()}")
-            }, {
-                isLoading.postValue(false)
-            })
-        }
+        mainRepository.getListPlace({
+            liveDataListPlace.postValue(it?.data)
+        },{ code, raw ->
+            Log.e("result_error","unSuccessFul")
+            Log.e("result_error","unSuccessFul # code $code")
+            Log.e("result_error","unSuccessFul # raw ${raw?.string()}")
+        },{
+            Log.e("result_error","Throwable")
+            it.printStackTrace()
+        },{
+            Log.d("result_debug","finally")
+            isLoading.postValue(false)
+        })
     }
 
 }
