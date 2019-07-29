@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 
-class MainRepository(private var viewModelScope: CoroutineScope) {
+class MainRepository(private val viewModelScope: CoroutineScope) {
 
     private val restApi = ServiceFactory.create()
 

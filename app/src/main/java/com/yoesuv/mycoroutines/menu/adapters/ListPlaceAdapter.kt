@@ -1,7 +1,6 @@
 package com.yoesuv.mycoroutines.menu.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +11,7 @@ import com.yoesuv.mycoroutines.databinding.ItemMainBinding
 import com.yoesuv.mycoroutines.menu.models.ListPlaceModel
 import com.yoesuv.mycoroutines.menu.viewmodels.ItemViewModel
 
-class ListPlaceAdapter(): ListAdapter<ListPlaceModel.PlaceModel, ListPlaceAdapter.PlaceViewHolder>(DiffCallback)  {
+class ListPlaceAdapter: ListAdapter<ListPlaceModel.PlaceModel, ListPlaceAdapter.PlaceViewHolder>(DiffCallback)  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val binding: ItemMainBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_main, parent, false)
@@ -22,7 +21,6 @@ class ListPlaceAdapter(): ListAdapter<ListPlaceModel.PlaceModel, ListPlaceAdapte
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         holder.bindData(getItem(holder.adapterPosition))
     }
-
 
     class PlaceViewHolder(private val itemMainBinding: ItemMainBinding) : RecyclerView.ViewHolder(itemMainBinding.root) {
 

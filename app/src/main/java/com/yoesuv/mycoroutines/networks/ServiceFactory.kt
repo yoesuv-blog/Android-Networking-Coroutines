@@ -21,6 +21,7 @@ object ServiceFactory {
         val clientBuilder = OkHttpClient.Builder()
         clientBuilder.addInterceptor(logging)
         clientBuilder.connectTimeout(AppConstants.TIME_OUT, TimeUnit.SECONDS)
+        clientBuilder.readTimeout(AppConstants.TIME_OUT, TimeUnit.SECONDS)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(AppConstants.BASE_URL)

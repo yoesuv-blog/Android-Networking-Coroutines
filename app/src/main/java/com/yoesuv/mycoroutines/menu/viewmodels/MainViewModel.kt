@@ -18,10 +18,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         isLoading.postValue(true)
         mainRepository.getListPlace({
             liveDataListPlace.postValue(it?.data)
-        },{ code, raw ->
+        },{ code, response ->
             Log.e("result_error","unSuccessFul")
             Log.e("result_error","unSuccessFul # code $code")
-            Log.e("result_error","unSuccessFul # raw ${raw?.string()}")
+            Log.e("result_error","unSuccessFul # raw ${response?.string()}")
         },{
             Log.e("result_error","Throwable")
             it.printStackTrace()
