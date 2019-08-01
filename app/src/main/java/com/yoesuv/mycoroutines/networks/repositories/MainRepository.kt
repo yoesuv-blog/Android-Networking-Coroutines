@@ -5,21 +5,20 @@ import com.yoesuv.mycoroutines.menu.models.ListPlaceModel
 import com.yoesuv.mycoroutines.networks.Network
 import com.yoesuv.mycoroutines.networks.ServiceFactory
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
-class MainRepository(private val viewModelScope: CoroutineScope) {
+class MainRepository(viewModelScope: CoroutineScope) {
 
+    private val network = Network(viewModelScope)
     private val restApi = ServiceFactory.create()
 
     fun getListPlace(context: Context, onSuccess: (ListPlaceModel?) -> Unit, onFinally:(Boolean) -> Unit) {
-        viewModelScope.launch {
-            Network.request(context, restApi.getListPlace(), {
-                onSuccess(it)
-            }, {
-                onFinally(true)
-            })
-        }
+        network.request(context, {
+            restApi.getListPlace()
+        }, {
+            onSuccess(it)
+        }, {
+            onFinally(true)
+        })
     }
 
 }
