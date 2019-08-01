@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setupSwipeRefresh()
 
         observeLiveData()
-        viewModel.getListPlace()
+        viewModel.getListPlace(this)
     }
 
     private fun observeLiveData() {
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getListPlace()
+            viewModel.getListPlace(this)
         }
     }
 }

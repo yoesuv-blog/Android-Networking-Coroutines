@@ -1,6 +1,8 @@
 package com.yoesuv.mycoroutines.networks.repositories
 
+import android.content.Context
 import com.yoesuv.mycoroutines.menu.models.ListPlaceModel
+import com.yoesuv.mycoroutines.networks.Network
 import com.yoesuv.mycoroutines.networks.ServiceFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -10,20 +12,13 @@ class MainRepository(private val viewModelScope: CoroutineScope) {
 
     private val restApi = ServiceFactory.create()
 
-    fun getListPlace( onSuccess: (ListPlaceModel?) -> Unit, onUnSuccessFul:(Int, ResponseBody?) -> Unit, onError: (Throwable) -> Unit, onFinally:(Boolean) -> Unit) {
+    fun getListPlace(context: Context, onSuccess: (ListPlaceModel?) -> Unit, onFinally:(Boolean) -> Unit) {
         viewModelScope.launch {
-            try {
-                val result = restApi.getListPlace()
-                if (result.isSuccessful) {
-                    onSuccess(result.body())
-                } else {
-                    onUnSuccessFul(result.code(), result.errorBody())
-                }
-            } catch (throwable: Throwable) {
-                onError(throwable)
-            } finally {
+            Network.request(context, restApi.getListPlace(), {
+                onSuccess(it)
+            }, {
                 onFinally(true)
-            }
+            })
         }
     }
 

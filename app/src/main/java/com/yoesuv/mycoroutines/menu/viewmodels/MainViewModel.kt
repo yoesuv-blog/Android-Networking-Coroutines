@@ -1,7 +1,7 @@
 package com.yoesuv.mycoroutines.menu.viewmodels
 
 import android.app.Application
-import android.util.Log
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,20 +14,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var liveDataListPlace: MutableLiveData<MutableList<ListPlaceModel.PlaceModel>> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getListPlace() {
+    fun getListPlace(context: Context) {
         isLoading.postValue(true)
-        mainRepository.getListPlace({
+        mainRepository.getListPlace(context, {
             liveDataListPlace.postValue(it?.data)
-        },{ code, response ->
-            Log.e("result_error","unSuccessFul")
-            Log.e("result_error","unSuccessFul # code $code")
-            Log.e("result_error","unSuccessFul # raw ${response?.string()}")
         },{
-            Log.e("result_error","Throwable")
-            Log.e("result_error","Throwable # ${it.message}")
-            it.printStackTrace()
-        },{
-            Log.d("result_debug","finally")
             isLoading.postValue(false)
         })
     }
