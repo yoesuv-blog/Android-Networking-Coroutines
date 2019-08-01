@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import retrofit2.Response
 
-
 object Network {
 
     fun <T> request(context: Context, response: Response<T>, onSuccess:(T?) -> Unit, onFinally:(Boolean) -> Unit){
