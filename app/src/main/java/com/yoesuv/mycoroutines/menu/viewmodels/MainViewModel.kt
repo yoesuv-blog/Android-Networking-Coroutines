@@ -24,6 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             Log.e("result_error","unSuccessFul # raw ${response?.string()}")
         },{
             Log.e("result_error","Throwable")
+            Log.e("result_error","Throwable # ${it.message}")
             it.printStackTrace()
         },{
             Log.d("result_debug","finally")
